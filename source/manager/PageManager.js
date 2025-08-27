@@ -41,7 +41,7 @@ export class PageManager {
     }
 
     async fadeTransition(oldPage, newPage) {
-        const DURATION = 500;
+        const DURATION = 100;
         const startTime = performance.now();
 
         newPage.visible = true;

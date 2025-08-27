@@ -1,9 +1,9 @@
-import {BattleStage} from "../component/BattleStage.js";
-import {WeaponPanel} from "../component/WeaponPanel.js";
-import {PlayerPanel} from "../component/PlayerPanel.js";
-import {GameStatus} from "../../module/design/GameStatus.js";
-import {GameWeapon} from "../../module/design/GameWeapon.js";
-import {getArchiveManager} from "../../Game.js";
+import { BattleStage } from "../component/BattleStage.js";
+import { WeaponSlidePanel } from "../component/WeaponSlidePanel.js";
+import { PlayerPanel } from "../component/PlayerPanel.js";
+import { GameStatus } from "../../module/design/GameStatus.js";
+import { GameWeapon } from "../../module/design/GameWeapon.js";
+import { getArchiveManager } from "../../Game.js";
 
 export class StartPage extends PIXI.Container {
     constructor(app) {
@@ -12,7 +12,7 @@ export class StartPage extends PIXI.Container {
 
         // init
         const status = new GameStatus();
-        status.weapons["WoodSword"] = new GameWeapon(1, 1);
+        status.weapons["WoodSword"] = new GameWeapon(1);
         getArchiveManager().LocalGameStatus = status;
 
         this.setup();
@@ -29,7 +29,7 @@ export class StartPage extends PIXI.Container {
         this.battleStage.position.set(1000, 700);
         this.addChild(this.battleStage);
 
-        this.weaponPanel = new WeaponPanel(this.app);
+        this.weaponPanel = new WeaponSlidePanel(this.app);
         this.weaponPanel.position.set(1000, 2800);
         this.addChild(this.weaponPanel);
 

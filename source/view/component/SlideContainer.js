@@ -34,11 +34,11 @@ export class SlideContainer extends PIXI.Container {
     }
 
     setup() {
-        this.contentContainer.eventMode = 'static';
-        this.contentContainer.on('pointerdown', this.onDragStart.bind(this));
-        this.contentContainer.on('pointermove', this.onDragMove.bind(this));
-        this.contentContainer.on('pointerup', this.onDragEnd.bind(this));
-        this.contentContainer.on('pointerupoutside', this.onDragEnd.bind(this));
+        this.eventMode = 'static';
+        this.on('pointerdown', this.onDragStart.bind(this));
+        this.on('pointermove', this.onDragMove.bind(this));
+        this.on('pointerup', this.onDragEnd.bind(this));
+        this.on('pointerupoutside', this.onDragEnd.bind(this));
     }
 
     onDragStart(event) {

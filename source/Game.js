@@ -1,8 +1,9 @@
-import {PageManager} from "./manager/PageManager.js";
-import {StartPage} from "./view/page/StartPage.js";
-import {PlayerManager} from "./manager/PlayerManager.js";
-import {ResourceManager} from "./manager/ResourceManager.js";
-import {ArchiveManager} from "./manager/ArchiveManager.js";
+import { PageManager } from "./manager/PageManager.js";
+import { StartPage } from "./view/page/StartPage.js";
+import { PlayerManager } from "./manager/PlayerManager.js";
+import { ResourceManager } from "./manager/ResourceManager.js";
+import { ArchiveManager } from "./manager/ArchiveManager.js";
+import { WeaponDataPanel } from "./view/component/WeaponDataPanel.js";
 
 let pageManager = null;
 let playerManager = null;
@@ -10,7 +11,7 @@ let resourceManager = null;
 let archiveManager = null;
 
 export function initGame(app) {
-    initResourceManager().then(()=>{
+    initResourceManager().then(() => {
         playerManager = new PlayerManager();
         archiveManager = new ArchiveManager();
         initPageManager(app);
@@ -20,6 +21,7 @@ export function initGame(app) {
 function initPageManager(app) {
     pageManager = new PageManager(app);
     pageManager.registerPage("start", new StartPage(app));
+    pageManager.registerPage("weapon", new WeaponDataPanel(app));
     pageManager.switchTo("start").then();
 }
 

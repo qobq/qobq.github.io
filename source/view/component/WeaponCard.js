@@ -1,6 +1,6 @@
-import {WeaponIcon} from "./WeaponIcon.js";
-import {NumberHelper} from "../../helper/NumberHelper.js";
-import {getArchiveManager} from "../../Game.js";
+import { WeaponIcon } from "./WeaponIcon.js";
+import { NumberHelper } from "../../helper/NumberHelper.js";
+import { getArchiveManager } from "../../Game.js";
 
 export class WeaponCard extends PIXI.Container {
     constructor() {
@@ -80,19 +80,29 @@ export class WeaponCard extends PIXI.Container {
             .on('pointerout', this.onPointerOut.bind(this))
             .on('pointerdown', this.onPointerDown.bind(this))
             .on('pointerup', this.onPointerUp.bind(this));
+
+        this.on('pointermove', this.onPointerMove.bind(this));
     }
 
     onPointerOver() {
+    }
+
+    onPointerMove() {
+        this.click = false;
     }
 
     onPointerOut() {
     }
 
     onPointerDown() {
-        this.emit('click', this);
+        this.click = true;
     }
 
     onPointerUp() {
+        if (this.click) {
+            this.click = false;
+            this.emit('click', this);
+        }
     }
 
     setWeapon(weapon, level, appendStrength, starCount) {
@@ -131,8 +141,8 @@ export class WeaponCard extends PIXI.Container {
 
         this.icon.imageSprite.texture = PIXI.Texture.from(`resource/image/weapon/${weapon.image}.png`);
         this.titleText.text = `L${level} ${weapon.name} + ${appendStrength}`;
-        const attackDamage = (Number(weapon.strength) + Number(appendStrength)) * starCount * level;
-        this.contentText.text = `攻击: ${NumberHelper.formatNumber(attackDamage)} = (${weapon.strength} + ${appendStrength}) x ${starCount} x ${level}`;
+        const attackDamage = (Number(weapon.strength) + Number(appendStrength)) * level;
+        this.contentText.text = `攻击: ${NumberHelper.formatNumber(attackDamage)} = (${weapon.strength} + ${appendStrength}) x ${level}`;
 
         const props = getArchiveManager().LocalGameStatus.props;
 

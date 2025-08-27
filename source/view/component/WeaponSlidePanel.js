@@ -1,13 +1,14 @@
-import {SlideContainer} from "./SlideContainer.js";
-import {WeaponCard} from "./WeaponCard.js";
-import {getArchiveManager, getResourceManager} from "../../Game.js";
-import {GameWeapon} from "../../module/design/GameWeapon.js";
+import { SlideContainer } from "./SlideContainer.js";
+import { WeaponCard } from "./WeaponCard.js";
+import { getArchiveManager, getResourceManager } from "../../Game.js";
+import { GameWeapon } from "../../module/design/GameWeapon.js";
+import { WeaponDataPanel } from "./WeaponDataPanel.js";
 
-export class WeaponPanel extends PIXI.Container {
+export class WeaponSlidePanel extends PIXI.Container {
     constructor() {
         super();
 
-        const slideContainer = new SlideContainer(2000, 1600, 400, 0x000000, 0);
+        const slideContainer = new SlideContainer(2000, 1600, 400, 0x000000, 1);
         this.addChild(slideContainer);
         slideContainer.position.set(-1000, -800);
 
@@ -15,7 +16,7 @@ export class WeaponPanel extends PIXI.Container {
 
         const weaponArray = Object.values(dataTable).sort((l, r) => l.strength - r.strength);
 
-        if (weaponArray.length < 10){
+        if (weaponArray.length < 10) {
             throw new Error("data error");
         }
 
@@ -23,12 +24,13 @@ export class WeaponPanel extends PIXI.Container {
 
             let gameWeapon = getArchiveManager().LocalGameStatus.weapons[weaponArray[i].key];
 
-            if (!gameWeapon){
+            if (!gameWeapon) {
                 gameWeapon = new GameWeapon();
             }
 
             const item = new WeaponCard();
             item.setWeapon(weaponArray[i], gameWeapon.level, gameWeapon.appendStrength, gameWeapon.star);
+            item.on('click', this.onClick.bind(this));
             slideContainer.addChild(item);
         }
 
@@ -37,5 +39,15 @@ export class WeaponPanel extends PIXI.Container {
             .drawRect(-1000, -800, 2000, 1600);
 
         this.addChild(this.frame);
+
+        this.weaponDataPanel = new WeaponDataPanel();
+        this.addChild(this.weaponDataPanel);
+        this.weaponDataPanel.eventMode = 'none';
+        this.weaponDataPanel.alpha = 0;
+    }
+
+    onClick() {
+        this.weaponDataPanel.eventMode = 'static';
+        this.weaponDataPanel.alpha = 1;
     }
 }
