@@ -1,0 +1,11 @@
+key,name,image,strength
+WoodSword,桃木剑,WoodSword,1
+IronSword,青钢剑,sword,2
+MountainAxe,开山斧,IronAxe,3
+KillDragon,屠龙,KillDragon,4
+NoEvil,莫邪,NoEvil,5
+AttackGeneral,干将,AttackGeneral,6
+DragonSpring,龙泉,DragonSpring,7
+GreenKnife,昆吾,knife,8
+WithSky,倚天,WithSky,9
+GoldenStick,如意金箍棒,GoldenStick,10

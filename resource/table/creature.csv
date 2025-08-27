@@ -1,0 +1,3 @@
+key,name,image,health,attack,speed,cProb,cScale,defend,miss,absorb
+Girl,村姑,girl,100,0,1100,500,2000,0,0,0
+Pig,猪将军,pig,50,0,1000,500,2000,0,0,0
